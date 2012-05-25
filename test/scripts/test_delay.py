@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # 
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
@@ -26,17 +27,44 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 
-ectomodule(cells
-           And.cpp
-           Constant.cpp
-           Counter.cpp
-           Dealer.cpp
-           Delay.cpp
-           If.cpp
-           Passthrough.cpp
-           PassthroughN.cpp
-           TrueEveryN.cpp
-           module.cpp
-)
+import ecto
+import ecto.ecto_test as ecto_test
 
-install_ecto_module(cells)
+def test_delay():
+    plasm = ecto.Plasm()
+    gen = ecto_test.Generate("Generator", step=1.0, start=0.0)
+    delay = ecto.Delay(num=3)
+    plasm.connect(gen['out'] >> delay['in']
+                  )
+    for i in range(10):
+      plasm.execute(niter=1)
+      print "Delayed output",i,":",delay.outputs.out
+      if i < 3:
+        assert delay.outputs.out == None
+      else:
+        assert delay.outputs.out == i - 3
+
+def test_delay2():
+    plasm = ecto.Plasm()
+    gen = ecto_test.Generate("Generator", step=1.0, start=0.0)
+    delay = ecto.Delay(num=1)
+    adder = ecto_test.Add()
+    plasm.connect(gen['out'] >> delay['in'],
+                  delay['out'] >> adder['left'],
+                  gen['out'] >> adder['right'],
+                  )
+    ecto.view_plasm(plasm)
+    for i in range(10):
+      print "=== Iteration",i,"==="
+      plasm.execute(niter=1)
+      print "  gen.outputs.out=",gen.outputs.out
+      print "delay.outputs.out=",delay.outputs.out
+      print "adder.outputs.out=",adder.outputs.out
+
+ 
+if __name__ == '__main__':
+    test_delay()
+    test_delay2()
+
+
+
