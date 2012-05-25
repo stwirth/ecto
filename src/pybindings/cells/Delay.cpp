@@ -56,6 +56,11 @@ namespace ecto
       {
         out["out"] << queue_.front();
         queue_.pop();
+        return ecto::OK;
+      }
+      else
+      {
+        return ecto::BREAK;
       }
     }
 
