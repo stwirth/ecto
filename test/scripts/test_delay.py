@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-# Copyright (c) 2011, Willow Garage, Inc.
+# Copyright (c) 2012, Stephan Wirth <stephan.wirth@gmail.com>
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -10,9 +10,6 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of the Willow Garage, Inc. nor the names of its
-#       contributors may be used to endorse or promote products derived from
-#       this software without specific prior written permission.
 # 
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -65,6 +62,4 @@ def test_delay2():
 if __name__ == '__main__':
     test_delay()
     test_delay2()
-
-
 
