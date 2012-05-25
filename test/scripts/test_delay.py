@@ -35,7 +35,6 @@ def test_delay():
                   )
     for i in range(10):
       plasm.execute(niter=1)
-      print "Delayed output",i,":",delay.outputs.out
       if i < 3:
         assert delay.outputs.out == None
       else:
@@ -50,15 +49,10 @@ def test_delay2():
                   delay['out'] >> adder['left'],
                   gen['out'] >> adder['right'],
                   )
-    ecto.view_plasm(plasm)
     for i in range(10):
-      print "=== Iteration",i,"==="
       plasm.execute(niter=1)
-      print "  gen.outputs.out=",gen.outputs.out
-      print "delay.outputs.out=",delay.outputs.out
-      print "adder.outputs.out=",adder.outputs.out
-      #if i > 0:
-      #  assert adder.outputs.out == i + (i-1) # <-- fails ???
+      if i > 0:
+        assert adder.outputs.out == i + (i-1)
 
  
 if __name__ == '__main__':
