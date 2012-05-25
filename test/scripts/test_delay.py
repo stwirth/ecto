@@ -57,6 +57,8 @@ def test_delay2():
       print "  gen.outputs.out=",gen.outputs.out
       print "delay.outputs.out=",delay.outputs.out
       print "adder.outputs.out=",adder.outputs.out
+      #if i > 0:
+      #  assert adder.outputs.out == i + (i-1) # <-- fails ???
 
  
 if __name__ == '__main__':
